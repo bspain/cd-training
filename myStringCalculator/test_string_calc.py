@@ -47,3 +47,19 @@ def test_should_return_sum_for_custom_delimiter():
     assert StringCalc().add("//.\n3.4") == 7
     assert StringCalc().add("//*\n4*5") == 9
     assert StringCalc().add("//[\n5[6") == 11
+
+# These tests are examples of testing the specific implementation details by calling interal private methods.
+# In TDD, these types of tests are not recommended because they are coupled to the implementation.
+# I believe there is value in these tests, but they should somehow be denoted as (optional) such that if/when the code is refactored, these tests should be considered disposable.
+def test_get_split_values_should_use_default_delimiter():
+    assert StringCalc()._get_split_values("1,2,3") == ["1", "2", "3"]
+    assert StringCalc()._get_split_values("2\n3\n4") == ["2", "3", "4"]
+    assert StringCalc()._get_split_values("3\n4,5") == ["3", "4", "5"]
+
+def test_get_split_values_should_use_custom_delimiter():
+    assert StringCalc()._get_split_values("//;\n1;2") == ["1", "2"]
+    assert StringCalc()._get_split_values("//`\n5`6") == ["5", "6"]
+    assert StringCalc()._get_split_values("//+\n2+3") == ["2", "3"]
+    assert StringCalc()._get_split_values("//.\n3.4") == ["3", "4"]
+    assert StringCalc()._get_split_values("//*\n4*5") == ["4", "5"]
+    assert StringCalc()._get_split_values("//[\n5[6") == ["5", "6"]
