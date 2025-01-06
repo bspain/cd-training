@@ -48,6 +48,20 @@ def test_should_return_sum_for_custom_delimiter():
     assert StringCalc().add("//*\n4*5") == 9
     assert StringCalc().add("//[\n5[6") == 11
 
+def test_should_throw_a_ValueError_exception_for_negative_number():
+    try:
+        StringCalc().add("-1,2")
+        assert False
+    except ValueError as e:
+        assert str(e) == "Negatives not allowed: -1"
+        
+def test_should_throw_exception_for_negative_numbers_with_message_containing_all_negative_values():
+    try:
+        StringCalc().add("-1,-3")
+        assert False
+    except ValueError as e:
+        assert str(e) == "Negatives not allowed: -1, -3"
+
 # These tests are examples of testing the specific implementation details by calling interal private methods.
 # In TDD, these types of tests are not recommended because they are coupled to the implementation.
 # I believe there is value in these tests, but they should somehow be denoted as (optional) such that if/when the code is refactored, these tests should be considered disposable.

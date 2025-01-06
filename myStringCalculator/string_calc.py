@@ -7,6 +7,8 @@ class StringCalc:
             numbers = self._get_split_values(input)
 
             for number in numbers:
+                if int(number) < 0:
+                    raise ValueError(f"Negatives not allowed: {', '.join([n for n in numbers if int(n) < 0])}")
                 total += int(number)
         return total    
     
