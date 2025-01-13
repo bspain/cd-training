@@ -62,6 +62,16 @@ def test_should_throw_exception_for_negative_numbers_with_message_containing_all
     except ValueError as e:
         assert str(e) == "Negatives not allowed: -1, -3"
 
+# Added in response to the new requirement that the last values used in the calculation should be returned for display purposes.
+# Nice that, in python, this meants seemless switching between class and instance methods.
+def test_should_return_all_values_used_in_last_calulation():
+    c = StringCalc()
+    assert c.add("1,2") == 3
+    assert c.getLastValues() == ["1", "2"]
+
+    assert c.add("3,4") == 7
+    assert c.getLastValues() == ["3", "4"]
+
 # These tests are examples of testing the specific implementation details by calling interal private methods.
 # In TDD, these types of tests are not recommended because they are coupled to the implementation.
 # I believe there is value in these tests, but they should somehow be denoted as (optional) such that if/when the code is refactored, these tests should be considered disposable.

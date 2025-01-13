@@ -1,6 +1,9 @@
 import re
 
 class StringCalc:
+    def __init__(self):
+        self.lastValues = []
+
     def add(self, input: str) -> int:
         total = 0
         if input != "":
@@ -10,8 +13,13 @@ class StringCalc:
                 if int(number) < 0:
                     raise ValueError(f"Negatives not allowed: {', '.join([n for n in numbers if int(n) < 0])}")
                 total += int(number)
+            
+            self.lastValues = numbers
         return total    
     
+    def getLastValues(self) -> list[str]:
+        return self.lastValues
+
     def _get_split_values(self, input: str) -> list[str]:
         # If the input string starts with '//'
         split_token = r'[,\n]'
