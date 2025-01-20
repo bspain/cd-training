@@ -1,49 +1,27 @@
 import sys
 import os
-from myFizzBuzz import global_function
+from myFizzBuzz import fizzbuzz
 
-# Add the directory containing myapp.py to the Python path
+# Add the directory containing myFizzBuzz to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+def test_should_render_a_values_for_non_fizzbuzz_numbers():
+    assert fizzbuzz(1) == "1"
+    assert fizzbuzz(2) == "2"
+    assert fizzbuzz(97) == "97"
+    assert fizzbuzz(98) == "98"
 
-# Example usage of global_function
-if __name__ == "__main__":
-    result = global_function()
-    # First value is 1
-    assert result[0] == "1"
+def test_should_render_Fizz_for_values_of_three():
+    assert fizzbuzz(3) == "Fizz"
+    assert fizzbuzz(6) == "Fizz"
+    assert fizzbuzz(9) == "Fizz"
 
-    # Second value is 2
-    assert result[1] == "2"
+def test_should_render_Buzz_for_values_of_five():
+    assert fizzbuzz(5) == "Buzz"
+    assert fizzbuzz(10) == "Buzz"
+    assert fizzbuzz(20) == "Buzz"
 
-    # Third value is Fizz
-    assert result[2] == "Fizz"
-
-    # Fourth value is 4
-    assert result[3] == "4"
-
-    # Sixth value is Fizz
-    assert result[5] == "Fizz"
-
-
-    # Fifth value is Buzz
-    assert result[4] == "Buzz"
-
-    # 15th value is FizzBuzz
-    assert result[14] == "FizzBuzz"
-
-    # 30th value is FizzBuzz
-    assert result[29] == "FizzBuzz"
-
-    # 45th value is FizzBuzz
-    assert result[44] == "FizzBuzz"
-
-    # 90th value is FizzBuzz
-    assert result[89] == "FizzBuzz"
-
-    # 99th value is Fizz
-    assert result[98] == "Fizz"
-
-    # Last value is Buzz
-    assert result[-1] == "Buzz"
-
-    print("All tests passed!")
+def test_should_render_FizzBuzz_for_values_of_fifteen():
+    assert fizzbuzz(15) == "FizzBuzz"
+    assert fizzbuzz(30) == "FizzBuzz"
+    assert fizzbuzz(45) == "FizzBuzz"

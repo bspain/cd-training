@@ -1,6 +1,7 @@
 {
     "python.testing.pytestArgs": [
-        "myStringCalculator"
+        "myStringCalculator",
+        "myFizzBuzz"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true
