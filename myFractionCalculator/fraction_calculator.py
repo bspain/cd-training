@@ -1,17 +1,18 @@
 import math
 
-from fraction_reducer import FractionReducer
 from fraction_separator import FractionSeparator
+from fraction_reducer import FractionReducer
+from fraction_joiner import FractionJoiner
  
 class FractionCalculator:
     
     def add(self, fraction1, fraction2):
         
-        numerator1, denominator1 = self.__separate(fraction1)
-        numerator2, denominator2 = self.__separate(fraction2)
+        # numerator1, denominator1 = self.__separate(fraction1)
+        # numerator2, denominator2 = self.__separate(fraction2)
 
-        numerator1, denominator1 = self.__reduce__fraction(numerator1, denominator1)
-        numerator2, denominator2 = self.__reduce__fraction(numerator2, denominator2)
+        numerator1, denominator1 = self.__reduce_and_separate_fraction(fraction1)
+        numerator2, denominator2 = self.__reduce_and_separate_fraction(fraction2)
 
         lcm = math.lcm(denominator1, denominator2)
 
@@ -21,15 +22,12 @@ class FractionCalculator:
         numerator = numerator1 + numerator2
         denominator = lcm
 
-        numerator, denominator = self.__reduce__fraction(numerator, denominator)
-
-        if denominator == 1:
-            return f"{numerator}"
-        return f"{numerator}/{denominator}"
-
+        return self.__join_and_reduce_fraction(numerator, denominator)
     
-    def __separate(self, fraction):
-        return FractionSeparator().separate(fraction)
+    def __reduce_and_separate_fraction(self, fraction):
+        reduced = FractionReducer().reduce(fraction)
+        return FractionSeparator().separate(reduced)
     
-    def __reduce__fraction(self, numerator, denominator):
-        return FractionReducer().reduce(numerator, denominator)
+    def __join_and_reduce_fraction(self, numerator, denominator):
+        joined = FractionJoiner().join(numerator, denominator)
+        return FractionReducer().reduce(joined)

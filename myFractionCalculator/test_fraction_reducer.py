@@ -19,9 +19,9 @@ def test_verify_my_understanding_of_gcd():
 
 def test_should_reduce_fraction_to_lowest_terms():
     reducer = FractionReducer()
-    assert reducer.reduce(1, 1) == [1, 1]
-    assert reducer.reduce(1, 2) == [1, 2]
-    assert reducer.reduce(2, 4) == [1, 2]
-    assert reducer.reduce(4, 6) == [2, 3]
-    assert reducer.reduce(5, 10) == [1, 2]
-    assert reducer.reduce(6, 9) == [2, 3]
+    assert reducer.reduce("1/1") == "1"
+    assert reducer.reduce("1/2") == "1/2"
+    assert reducer.reduce("2/4") == "1/2"
+    assert reducer.reduce("4/6") == "2/3"
+    assert reducer.reduce("5/10") == "1/2"
+    assert reducer.reduce("6/9") == "2/3"
